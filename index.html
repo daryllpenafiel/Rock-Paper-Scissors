@@ -1,0 +1,66 @@
+<!doctype HTML> 
+<html>
+
+<head>
+    <title>Rock, Paper, Scissors</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="./assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+        <div class="player-1-screen col-sm-6 col-md-6">
+            <div class="p1-input">
+                <input type=text id="p1-name-input" placeholder="P1 name here">
+                <button type="button" id="p1Submit">submit</button>
+            </div>
+
+            <div class="p1-weapons">
+                <h2>P1</h2>
+                    <button type="button" id="p1Rock" data-value="rock">ROCK</button>
+                    <button type="button" id="p1Paper" data-value="paper">PAPER</button>
+                    <button type="button" id="p1Scissors" data-value="scissors">SCISSORS</button>
+            </div><br>
+
+            <button type="button" id="p1play" data-value="play">PLAY</button>
+            <button type="button" class="reset" data-value="reset">RESET</button>
+
+            <div class="p1-stats">
+                <h3>Name: <span class="p1-name"> </span> </h3>
+                <h3>Wins: <span class="p1-wins"> </span> </h3>
+                <h3>Losses: <span class="p1-losses"> </span> </h3>
+                <h3>Weapon: <span class="p1-weapon"> </span> </h3>
+            </div>
+                <h2 class="results"> </h2>
+        </div>
+
+        <div class="player-1-screen col-sm-6 col-md-6">
+            <div class="p2-input">
+                <input type=text id="p2-name-input" placeholder="P2 name here">
+                <button type="button" id="p2Submit">submit</button>
+            </div>
+            <div class="p2-weapons">
+                <h2>P2</h2>
+                    <button type="button" id="p2Rock" data-value="rock">ROCK</button>
+                    <button type="button" id="p2Paper" data-value="paper">PAPER</button>
+                    <button type="button" id="p2Scissors" data-value="scissors">SCISSORS</button>  
+            </div><br>
+                <button type="button" id="p2play" data-value="play">PLAY</button>
+                <button type="button" class="reset" data-value="reset">RESET</button>
+                <div class="p2-stats">
+                    <h3>Name: <span class="p2-name"> </span> </h3>
+                    <h3>Wins: <span class="p2-wins"> </span> </h3>
+                    <h3>Losses: <span class="p2-losses"> </span> </h3>
+                    <h3>Weapon: <span class="p2-weapon"> </span> </h3>
+                </div>
+                    <h2 class="results"> </h2>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase.js"></script>
+    <script src="./assets/javascript/logic.js"></script>
+</body>
+</html>
