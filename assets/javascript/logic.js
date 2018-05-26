@@ -29,6 +29,8 @@ $(document).ready(function(){
 
     var databasep1 = firebase.database().ref().child('p1');
     var databasep2 = firebase.database().ref().child('p2');
+    var database = firebase.database();
+
     var weaponOutput1;
     var weaponOutput2;
 
@@ -41,7 +43,9 @@ $(document).ready(function(){
         var weaponOutput1 = snapshot.val().weapon;
 
         $(".p1-name").text(nameOutput1);
-        $(".p1-weapon").text(weaponOutput1);  
+        $(".p1-weapon").text(weaponOutput1);
+        $(".p1-wins").text(winsOutput1);
+        $(".p1-losses").text(lossesOutput1); 
     })
     
     databasep2.on("value", function(snapshot){
@@ -50,8 +54,10 @@ $(document).ready(function(){
         var lossesOutput2 = snapshot.val().losses;
         var weaponOutput2 = snapshot.val().weapon;
 
-        console.log("name output: " +  nameOutput2);
-        console.log("weapon output: " + weaponOutput2);
+        $(".p2-name").text(nameOutput2);
+        $(".p2-weapon").text(weaponOutput2);
+        $(".p2-wins").text(winsOutput2);
+        $(".p2-losses").text(lossesOutput2); 
     })
     
     function clearWeapons() {
@@ -96,8 +102,8 @@ $(document).ready(function(){
     });
 
     $(document).on("click","#p1play",function(snapshot) {
-        console.log(weaponOutput2);
-        console.log(weaponOutput1);
+        
+
         event.preventDefault();
         if (weaponOutput2) {
             playGame();
@@ -145,6 +151,7 @@ $(document).ready(function(){
     //Game Logic
         function playGame() {
             console.log("play game");
+
         do {
             if (weaponOutput1=="rock" && p2=="scissors") {
                 p1win();
@@ -165,12 +172,38 @@ $(document).ready(function(){
         } 
         while (weaponOutput1 == weaponOutput2);
         }
-    })
 
+        //Connections part. If p1 connected... display info. If p2 is not connected.. display waiting for P2, then when connected, start game  
+        //Revise p1 and p2play click event function
+        //,,should be p1 chooses a weapon first,, and then p2 and the start the game right away
 
+        //Connections
 
+        var maxPlayers = 2;
+        var playersList= database.ref('/connections');
+        var connectedRef = database.ref(".info/connected");
+        var playerData = "";
 
+        connectedRef.on("value", function(snapshot) {
 
+            // If they are connected..
+            if (snapshot.val()) {
+        
+            // Add user to the connections list.
+            var con = playersList.push(true);
+            // Remove user from the connection list when they disconnect.
+            con.onDisconnect().remove();
+            }
+        });
+        
+        // When first loaded or when the connections list changes...
+        playersList.on("value", function(snapshot) {
+        
+            // Display the viewer count in the html.
+            // The number of online users is the number of children in the connections list.
+            $(".connected-viewers").text(snapshot.numChildren());
+        });
+        
 
-
+})
    
